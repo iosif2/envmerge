@@ -72,10 +72,7 @@ def _format_value(value: str) -> str:
     if _is_safe_unquoted(value):
         return value
     escaped = (
-        value.replace("\\", r"\\")
-        .replace('"', r"\"")
-        .replace("\n", r"\n")
-        .replace("\t", r"\t")
+        value.replace("\\", r"\\").replace('"', r"\"").replace("\n", r"\n").replace("\t", r"\t")
     )
     return f'"{escaped}"'
 

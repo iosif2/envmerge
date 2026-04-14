@@ -1,4 +1,4 @@
-"""envsync package."""
+"""envmerge package."""
 
 from .core import sync_env
 from .diff import diff_env

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
-import re
 from typing import Literal
 
 KEY_RE = re.compile(r"^[A-Z0-9_]+$")
@@ -65,16 +65,12 @@ def parse_env_text(text: str, *, source: str = "<memory>") -> ParsedEnv:
         key, value = kv
         values[key] = value
         entries.append((key, value))
-        lines.append(
-            ParsedLine(kind="kv", raw=raw_line, key=key, value=value, line_no=index)
-        )
+        lines.append(ParsedLine(kind="kv", raw=raw_line, key=key, value=value, line_no=index))
 
     return ParsedEnv(values=values, entries=entries, lines=lines, warnings=warnings)
 
 
-def _parse_key_value_line(
-    raw_line: str, *, source: str, line_no: int
-) -> tuple[str, str] | None:
+def _parse_key_value_line(raw_line: str, *, source: str, line_no: int) -> tuple[str, str] | None:
     text = raw_line.strip()
     if text.startswith("export "):
         text = text[len("export ") :].lstrip()

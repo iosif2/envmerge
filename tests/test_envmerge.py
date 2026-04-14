@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from envsync.core import sync_env
-from envsync.parser import parse_env_text
+from envmerge.core import sync_env
+from envmerge.parser import parse_env_text
 
 
 def test_sync_preserves_example_comments_and_blank_lines(tmp_path: Path):

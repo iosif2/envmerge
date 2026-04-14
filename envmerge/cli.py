@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
 from .core import sync_env
 from .diff import _diff, diff_to_json
 from .parser import parse_env_file
 from .printer import print_check, print_diff
-
 
 EXIT_SUCCESS = 0
 EXIT_VALIDATION_ERROR = 1
@@ -16,14 +15,12 @@ EXIT_FILE_MISSING = 2
 
 
 def _add_common_paths(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument(
-        "--example", default=".env.example", help="Path to .env.example"
-    )
+    parser.add_argument("--example", default=".env.example", help="Path to .env.example")
     parser.add_argument("--env", default=".env", help="Path to .env")
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="envsync", description="Sync .env files")
+    parser = argparse.ArgumentParser(prog="envmerge", description="Sync .env files")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     sync_parser = subparsers.add_parser("sync", help="Rebuild .env from .env.example")
@@ -40,13 +37,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Use empty values for missing keys instead of example defaults",
     )
 
-    check_parser = subparsers.add_parser(
-        "check", help="Validate drift against .env.example"
-    )
+    check_parser = subparsers.add_parser("check", help="Validate drift against .env.example")
     _add_common_paths(check_parser)
-    check_parser.add_argument(
-        "--strict", action="store_true", help="Report empty values"
-    )
+    check_parser.add_argument("--strict", action="store_true", help="Report empty values")
 
     diff_parser = subparsers.add_parser("diff", help="Show drift summary")
     _add_common_paths(diff_parser)
@@ -56,9 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
         help="Output format",
     )
-    diff_parser.add_argument(
-        "--strict", action="store_true", help="Include empty values"
-    )
+    diff_parser.add_argument("--strict", action="store_true", help="Include empty values")
 
     return parser
 
@@ -128,12 +119,7 @@ def _handle_diff(args: argparse.Namespace) -> int:
             print(output)
     return (
         EXIT_SUCCESS
-        if not (
-            result.added
-            or result.removed
-            or result.changed
-            or (args.strict and result.empty)
-        )
+        if not (result.added or result.removed or result.changed or (args.strict and result.empty))
         else EXIT_VALIDATION_ERROR
     )
 

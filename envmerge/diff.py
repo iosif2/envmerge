@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, asdict
-from pathlib import Path
 import json
+from dataclasses import asdict, dataclass
+from pathlib import Path
 
 from .parser import ParsedEnv, parse_env_file
 
@@ -42,11 +42,7 @@ def _diff(example: ParsedEnv, current: ParsedEnv, *, strict: bool) -> DiffResult
         for key, _ in example.entries
         if key in current_values and current_values[key] != example_values[key]
     ]
-    empty = [
-        key
-        for key, _ in current.entries
-        if key in example_keys and current_values[key] == ""
-    ]
+    empty = [key for key, _ in current.entries if key in example_keys and current_values[key] == ""]
     if not strict:
         empty = []
     return DiffResult(added=added, removed=removed, changed=changed, empty=empty)

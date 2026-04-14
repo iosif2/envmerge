@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "envsync"
+name = "envmerge"
 version = "0.1.0"
 requires-python = ">=3.11"
 description = "Deterministically sync .env files from .env.example"
@@ -12,10 +12,10 @@ license = {text = "MIT"}
 authors = [{name = "iosif2"}]
 
 [project.scripts]
-envsync = "envsync.cli:main"
+envmerge = "envmerge.cli:main"
 
 [tool.setuptools]
-packages = ["envsync"]
+packages = ["envmerge"]
 
 [dependency-groups]
 dev = [
@@ -23,3 +23,14 @@ dev = [
     "pytest>=9.0.3",
     "ruff>=0.15.10",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["envmerge"]
