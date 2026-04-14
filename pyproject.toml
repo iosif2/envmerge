@@ -10,6 +10,23 @@ description = "Deterministically sync .env files from .env.example"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [{name = "iosif2"}]
+keywords = ["env", "dotenv", "cli", "devtools"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+]
+
+[project.urls]
+Homepage = "https://github.com/iosif2/envmerge"
+Repository = "https://github.com/iosif2/envmerge"
+Issues = "https://github.com/iosif2/envmerge/issues"
 
 [project.scripts]
 envmerge = "envmerge.cli:main"
