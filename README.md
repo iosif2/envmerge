@@ -1,27 +1,32 @@
 # envmerge
 
-`envmerge` syncs `.env` from `.env.example` with predictable ordering and minimal drift.
+Sync `.env` from `.env.example` — deterministic ordering, zero drift.
+
+```bash
+uvx envmerge sync
+```
+
+## Usage
+
+```bash
+envmerge sync                # rebuild .env from .env.example
+envmerge sync --dry-run      # preview without writing
+envmerge check               # exit 1 if .env is out of sync
+envmerge diff                # show what drifted
+envmerge diff --format=json  # machine-readable
+```
 
 ## Install
 
 ```bash
-uv sync --group dev
-uv run envmerge --help
-```
-
-## Commands
-
-```bash
-uv run envmerge sync
-uv run envmerge sync --dry-run
-uv run envmerge check
-uv run envmerge diff --format=json
+uv tool install envmerge   # global CLI
+uv add envmerge            # project dependency
 ```
 
 ## Development
 
 ```bash
-pre-commit install
+uv sync --group dev
+prek install
 uv run pytest
-pre-commit run --all-files
 ```
